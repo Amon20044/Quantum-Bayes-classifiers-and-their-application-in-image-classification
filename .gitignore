@@ -1,0 +1,189 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+qbc_env/
+.venv/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# Spyder
+.spyderproject
+.spyproject
+
+# PyTest
+.pytest_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.hypothesis/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre
+.pyre/
+
+# pytype
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# Data files
+*.csv
+*.pkl
+*.pickle
+*.h5
+*.hdf5
+*.npz
+*.npy
+
+# Dataset directories
+data/
+datasets/
+mnist_data/
+fashion_mnist_data/
+scikit_learn_data/
+
+# Model checkpoints
+checkpoints/
+models/
+*.pth
+*.pt
+*.ckpt
+*.pb
+*.onnx
+
+# Logs
+logs/
+*.log
+wandb/
+mlruns/
+tensorboard/
+
+# Output files
+results/
+outputs/
+experiments/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.pdf
+!figures/*.png
+!figures/*.pdf
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# MindSpore / MindQuantum specific
+mindspore_ascend/
+*.air
+*.om
+*.onnx
+
+# Streamlit
+.streamlit/secrets.toml
+.streamlit/config.toml
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+*.env
+
+# Documentation builds
+docs/_build/
+docs/_static/
+docs/_templates/
+site/
+
+# Distribution / packaging
+*.tar.gz
+*.zip
+*.whl
+
+# Unit test / coverage reports
+htmlcov/
+
+# Profiling
+*.prof
+*.lprof
+*.pstats
+
+# IDEs
+*.sublime-project
+*.sublime-workspace
+
+# OS specific
+.Trash-*/
+ehthumbs.db
+ehthumbs_vista.db
+
+# Project specific
+hybrid_qbc_comparison.png
+test_fix.py
+simple_test.py
+debug_*.py
+scratch_*.py
+
+# Cache directories
+.cache/
+__pypackages__/
