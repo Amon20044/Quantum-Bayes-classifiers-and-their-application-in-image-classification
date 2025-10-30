@@ -1,6 +1,6 @@
 # 🔬 Quantum Bayesian Classifier (QBC) - Complete Implementation
 
-![Python](https://img.shields.io/badge/Python-3.9%2B-blue)
+![Python](https://img.shields.io/badge/Python-3.11%2B-blue)
 ![MindQuantum](https://img.shields.io/badge/MindQuantum-0.9%2B-green)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
@@ -465,7 +465,7 @@ MIT License - see LICENSE file
 
 For questions or collaboration:
 - Open an issue on GitHub
-- Email: [your-email@example.com]
+- Email: [amonsharma2000@gmail.com]
 
 ---
 
