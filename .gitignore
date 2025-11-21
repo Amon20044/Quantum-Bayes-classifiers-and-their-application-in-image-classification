@@ -118,7 +118,6 @@ experiments/
 *.jpeg
 *.gif
 *.svg
-*.pdf
 !figures/*.png
 !figures/*.pdf
 

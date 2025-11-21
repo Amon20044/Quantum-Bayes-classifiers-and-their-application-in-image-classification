@@ -303,8 +303,11 @@ class QBCVisualizer:
             n_samples: Number to show
             title: Plot title
         """
+        # Ensure all arrays have consistent length
+        min_length = min(len(images), len(y_true), len(y_pred), len(probabilities))
+        
         # Select samples: mix of correct and incorrect
-        correct_mask = (y_true == y_pred)
+        correct_mask = (y_true[:min_length] == y_pred[:min_length])
         incorrect_indices = np.where(~correct_mask)[0]
         correct_indices = np.where(correct_mask)[0]
         
@@ -313,18 +316,18 @@ class QBCVisualizer:
         n_correct = n_samples - n_incorrect
         
         if len(incorrect_indices) > 0:
-            selected_incorrect = np.random.choice(incorrect_indices, n_incorrect, replace=False)
+            selected_incorrect = np.random.choice(incorrect_indices, min(n_incorrect, len(incorrect_indices)), replace=False)
         else:
-            selected_incorrect = []
+            selected_incorrect = np.array([], dtype=int)
         
         if len(correct_indices) > 0:
             selected_correct = np.random.choice(correct_indices, min(n_correct, len(correct_indices)), replace=False)
         else:
-            selected_correct = []
+            selected_correct = np.array([], dtype=int)
         
         indices = np.concatenate([selected_correct, selected_incorrect])
         
-        n_show = len(indices)
+        n_show = min(len(indices), n_samples)
         cols = 5
         rows = (n_show + cols - 1) // cols
         
@@ -336,7 +339,13 @@ class QBCVisualizer:
         
         for idx, ax in enumerate(axes.flat):
             if idx < n_show:
-                i = indices[idx]
+                i = int(indices[idx])
+                
+                # Double-check bounds
+                if i >= min_length:
+                    ax.axis('off')
+                    continue
+                    
                 ax.imshow(images[i], cmap='gray', interpolation='nearest')
                 
                 # Color based on correctness

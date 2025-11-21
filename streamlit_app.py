@@ -134,7 +134,20 @@ st.sidebar.subheader("🔧 Preprocessing")
 block_size = st.sidebar.slider("Sampling Block Size", 5, 9, 7, help="Size of local sampling blocks")
 grid_size = st.sidebar.slider("Grid Size", 2, 4, 3, help="Number of blocks per dimension (3x3 = 9 features)")
 n_train_samples = st.sidebar.slider("Training Samples per Class", 100, 1000, 500, step=100)
-n_test_samples = st.sidebar.slider("Test Samples per Class", 50, 500, 200, step=50)
+
+# Full test dataset option
+use_full_test = st.sidebar.checkbox(
+    "📊 Use Full Test Dataset",
+    value=False,
+    help="Use entire test set instead of limited samples. Will take longer but give more accurate results."
+)
+
+if not use_full_test:
+    n_test_samples = st.sidebar.slider("Test Samples per Class", 50, 500, 200, step=50)
+else:
+    n_test_samples = None  # Signal to use all remaining data
+    st.sidebar.caption("✅ Using complete test set")
+
 
 st.sidebar.markdown("---")
 run_experiment = st.sidebar.button("🚀 Run Experiment", use_container_width=True)
@@ -184,9 +197,16 @@ if run_experiment:
             train_indices = np.concatenate([train_indices0, train_indices1])
             np.random.shuffle(train_indices)
             
-            # Test set
-            test_indices0 = indices0[n_train_samples:n_train_samples+n_test_samples]
-            test_indices1 = indices1[n_train_samples:n_train_samples+n_test_samples]
+            # Test set - use all remaining data if n_test_samples is None
+            if n_test_samples is None:
+                # Full test dataset
+                test_indices0 = indices0[n_train_samples:]
+                test_indices1 = indices1[n_train_samples:]
+            else:
+                # Limited samples
+                test_indices0 = indices0[n_train_samples:n_train_samples+n_test_samples]
+                test_indices1 = indices1[n_train_samples:n_train_samples+n_test_samples]
+            
             test_indices = np.concatenate([test_indices0, test_indices1])
             np.random.shuffle(test_indices)
             
@@ -401,6 +421,10 @@ if st.session_state.experiment_run and st.session_state.results:
         
         if selected_clf:
             res = results[selected_clf]
+            # Use classifier name to seed random for unique samples per model
+            seed_value = abs(hash(selected_clf)) % (2**32)
+            np.random.seed(seed_value)
+            
             fig_pred = viz.plot_prediction_examples(
                 X_test, y_test, res['predictions'], res['probabilities'],
                 n_samples=10,
