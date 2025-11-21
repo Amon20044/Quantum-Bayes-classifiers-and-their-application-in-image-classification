@@ -461,12 +461,4 @@ MIT License - see LICENSE file
 
 ---
 
-## 📧 Contact
-
-For questions or collaboration:
-- Open an issue on GitHub
-- Email: [your-email@example.com]
-
----
-
 **Made with ❤️ for Quantum Machine Learning Research**
