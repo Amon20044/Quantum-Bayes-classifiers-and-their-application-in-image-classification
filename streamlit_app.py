@@ -133,6 +133,27 @@ if use_hybrid:
 st.sidebar.subheader("🔧 Preprocessing")
 block_size = st.sidebar.slider("Sampling Block Size", 5, 9, 7, help="Size of local sampling blocks")
 grid_size = st.sidebar.slider("Grid Size", 2, 4, 3, help="Number of blocks per dimension (3x3 = 9 features)")
+
+# Calculate and display quantum resource requirements
+n_features = grid_size * grid_size
+n_qubits = 1 + n_features
+n_quantum_states = 2 ** n_qubits
+
+st.sidebar.info(
+    f"⚛️ **Qubits: {n_qubits}** | 🎯 **Features: {n_features}**",
+    icon="ℹ️"
+)
+st.sidebar.caption(
+    f"💡 Quantum states: 2^{n_qubits} = {n_quantum_states:,}"
+)
+
+# Warning for high qubit counts
+if n_qubits >= 17:
+    st.sidebar.warning(
+        f"⚠️ **High Memory!** {n_qubits} qubits = {n_quantum_states:,} states. May be slow.",
+        icon="⚠️"
+    )
+
 n_train_samples = st.sidebar.slider("Training Samples per Class", 100, 1000, 500, step=100)
 
 # Full test dataset option
@@ -147,6 +168,7 @@ if not use_full_test:
 else:
     n_test_samples = None  # Signal to use all remaining data
     st.sidebar.caption("✅ Using complete test set")
+
 
 
 st.sidebar.markdown("---")
