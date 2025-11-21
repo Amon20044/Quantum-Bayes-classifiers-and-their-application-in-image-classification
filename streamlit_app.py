@@ -110,24 +110,7 @@ qbc_types = st.sidebar.multiselect(
     help="Choose one or more Quantum Bayesian Classifier architectures"
 )
 
-# Hybrid approach option
-use_hybrid = st.sidebar.checkbox(
-    "🔬 Use Hybrid Classical-Quantum Approach",
-    value=False,
-    help="Combine GaussianNB with quantum circuits for enhanced performance"
-)
-
-if use_hybrid:
-    st.sidebar.markdown("**Hybrid Configuration:**")
-    classical_weight = st.sidebar.slider("Classical Weight", 0.0, 1.0, 0.3, 0.05)
-    quantum_weight = 1.0 - classical_weight
-    st.sidebar.info(f"Quantum Weight: {quantum_weight:.2f}")
-    
-    feature_selection = st.sidebar.selectbox(
-        "Feature Selection Method",
-        ["gaussian_nb", "mutual_info", "f_score"],
-        help="Method for selecting most important features"
-    )
+# Removed hybrid ML - keep it pure quantum!
 
 # Preprocessing parameters
 st.sidebar.subheader("🔧 Preprocessing")
@@ -142,9 +125,6 @@ n_quantum_states = 2 ** n_qubits
 st.sidebar.info(
     f"⚛️ **Qubits: {n_qubits}** | 🎯 **Features: {n_features}**",
     icon="ℹ️"
-)
-st.sidebar.caption(
-    f"💡 Quantum states: 2^{n_qubits} = {n_quantum_states:,}"
 )
 
 # Warning for high qubit counts
